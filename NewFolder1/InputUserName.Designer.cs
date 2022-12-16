@@ -64,6 +64,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "Принять";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // inputNameTextBox
             // 
@@ -92,8 +93,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(260, 336);
             this.Controls.Add(this.tableLayoutPanel1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "InputUserName";
             this.Text = "InputUserName";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.InputUserName_FormClosed);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);

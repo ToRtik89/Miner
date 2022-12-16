@@ -7,8 +7,8 @@ namespace Miner
 {
     public partial class Game : Form
     {
-        int width = 10;
-        int height = 10;
+        int width = 20;
+        int height = 20;
         int offset = 30;
         int bombPercent = 10;
         bool isFirstClick = true;
@@ -16,11 +16,21 @@ namespace Miner
         int cellsOpened = 0;
         int bombs = 0;
 
+        int score;
+
 
         public Game()
         {
             InitializeComponent();
+            Timer timer1 = new Timer();
+            timer1.Tick += Timer1_Tick;
+
+            timer1.Interval = 1000;
+            timer1.Enabled = true;
+
         }
+
+        private void Timer1_Tick(object sender, EventArgs e) => score++;
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
@@ -54,62 +64,56 @@ namespace Miner
             }
         }
 
-        void FieldButtonClick(object sender, MouseEventArgs e)
+        private void FieldButtonClick(object sender, MouseEventArgs e)
         {
 
             FieldButton clickedButton = (FieldButton)sender;
             if (e.Button == MouseButtons.Left && clickedButton.isClickable)  // новое
             {
-                if (clickedButton.isBomb)
-                {
-                    if (isFirstClick)
-                    {
-                        clickedButton.isBomb = false;
-                        isFirstClick = false;
-                        bombs--;
-                        OpenRegion(clickedButton.xCoord, clickedButton.yCoord, clickedButton);
-                    }
-                    else
-                    {
-                        Explode();
-                    }
+                if (!clickedButton.isBomb) { EmptyFieldButtonClick(clickedButton); return; }
 
-                }
-                else
-                {
-                    EmptyFieldButtonClick(clickedButton);
-                }
+                if (!isFirstClick) { Explode(); return; }
+
+                clickedButton.isBomb = false;
+                isFirstClick = false;
+                bombs--;
+                OpenRegion(clickedButton.xCoord, clickedButton.yCoord, clickedButton);
+                    
+
                 isFirstClick = false;
             }
+
+
             if (e.Button == MouseButtons.Right)
             {
                 clickedButton.isClickable = !clickedButton.isClickable;
+
                 if (!clickedButton.isClickable)
-                {
                     clickedButton.Text = "B";
-                }
+
                 else
-                {
                     clickedButton.Text = "";
-                }
             }
             CheckWin();
         }
 
-        void Explode()
+        private void Explode()
         {
             // Можно дописать (в самом конце) раскрытие бомб начиная от нажатой по очереди. (а не всех сразу)
             foreach (FieldButton button in field)
             {
                 if (button.isBomb)
                 {
-                    button.Text = "*";
+                    button.Text = "💣";
                 }
             }
-            MessageBox.Show("Вы проиграли :(");
-            Application.Restart();
+
+            MessageBox.Show("Вы проиграли!");
+
+            GameOver();
+
         }
-        void EmptyFieldButtonClick(FieldButton clickedButton)
+        private void EmptyFieldButtonClick(FieldButton clickedButton)
         {
 
             for (int y = 0; y < height; y++)
@@ -125,7 +129,7 @@ namespace Miner
             }
         }
 
-        void OpenRegion(int xCoord, int yCoord, FieldButton clickedButton)
+        private void OpenRegion(int xCoord, int yCoord, FieldButton clickedButton)
         {
             Queue<FieldButton> queue = new Queue<FieldButton>();
             queue.Enqueue(clickedButton);
@@ -159,21 +163,18 @@ namespace Miner
             }
         }
 
-        void OpenCell(int x, int y, FieldButton clickedButton)
+        private void OpenCell(int x, int y, FieldButton clickedButton)
         {
             int bombsAround = CountBombsAround(x, y);
-            if (bombsAround == 0)
-            {
+            if (bombsAround == 0) { }
 
-            }
             else
-            {
                 clickedButton.Text = "" + bombsAround;
-            }
+
             clickedButton.Enabled = false;
         }
 
-        int CountBombsAround(int xCoord, int yCoord)
+        private int CountBombsAround(int xCoord, int yCoord)
         {
             int bombsAround = 0;
             for (int x = xCoord - 1; x <= xCoord + 1; x++)
@@ -192,18 +193,27 @@ namespace Miner
             return bombsAround;
         }
 
-        void CheckWin()
+        private void CheckWin()
         {
             int cells = width * height;
             int emptyCells = cells - bombs;
             if (cellsOpened >= emptyCells)
             {
-                FormClass.InputUserName = new InputUserName();
-                FormClass.InputUserName.Show();
+
+                MessageBox.Show("Ты выйграл!");
+                GameOver();
             }
         }
 
-        
+        private void GameOver()
+        {
+            Hide();
+            FormClass.InputUserName = new InputUserName();
+            FormClass.InputUserName.Score = score;
+            FormClass.InputUserName.Show();
+        }
+
+        private void Game_FormClosed(object sender, FormClosedEventArgs e) => GameOver();
     }
 
 

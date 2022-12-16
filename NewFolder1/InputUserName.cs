@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Windows.Forms;
 
 namespace Miner
@@ -35,10 +27,10 @@ namespace Miner
         {
             InitializeComponent();
         }
+        
 
-        private void submitNameButton_Click(object sender, System.EventArgs e)
+        private void button1_Click(object sender, System.EventArgs e)
         {
-
             name = inputNameTextBox.Text;
 
             if (name == "")
@@ -51,7 +43,6 @@ namespace Miner
 
             FormClass.InputUserName.Hide();
             FormClass.Menu.Show();
-
         }
 
         private async void WriteLeaderBoardUser()
@@ -64,11 +55,8 @@ namespace Miner
             }
         }
 
-        private void InputUsernameForm_FormClosed(object sender, FormClosedEventArgs e) => FormClass.Menu.Show();
+        private void InputUserName_FormClosed(object sender, FormClosedEventArgs e) => FormClass.Menu.Show();
 
-        private void InputUsernameForm_Load(object sender, System.EventArgs e)
-        {
-
-        }
+        
     }
 }

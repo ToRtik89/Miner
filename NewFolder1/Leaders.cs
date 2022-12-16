@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 
 namespace Miner
 {
@@ -92,11 +86,8 @@ namespace Miner
 
         }
 
-        private void LeadersForm_FormClosed(object sender, FormClosedEventArgs e) => FormClass.Menu.Show();
+        private void buttonCloseLeaderBoard_Click(object sender, EventArgs e) => FormClass.Leaders.Close();
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            FormClass.Leaders.Close();
-        }
+        private void Leaders_FormClosed(object sender, FormClosedEventArgs e) => FormClass.Menu.Show();
     }
 }

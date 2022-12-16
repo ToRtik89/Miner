@@ -359,6 +359,7 @@
             this.buttonCloseLeaderBoard.TabIndex = 2;
             this.buttonCloseLeaderBoard.Text = "Закрыть ";
             this.buttonCloseLeaderBoard.UseVisualStyleBackColor = false;
+            this.buttonCloseLeaderBoard.Click += new System.EventHandler(this.buttonCloseLeaderBoard_Click);
             // 
             // Leaders
             // 
@@ -366,8 +367,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.tableLayoutPanel2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Leaders";
             this.Text = "Leaders";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Leaders_FormClosed);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
