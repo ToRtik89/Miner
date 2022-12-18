@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace Miner
 {
-    public partial class InputUserName : Form
+    public partial class InputUserNameForm : Form
     {
         private int score = 0;
 
@@ -23,7 +23,7 @@ namespace Miner
             get { return name; }
         }
 
-        public InputUserName()
+        public InputUserNameForm()
         {
             InitializeComponent();
         }

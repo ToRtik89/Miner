@@ -6,14 +6,14 @@ using System.Windows.Forms;
 
 namespace Miner
 {
-    public partial class Leaders : Form
+    public partial class LeadersForm : Form
     {
         private List<string> Users = new List<string>();
 
         private List<Label> Labels = new List<Label>();
 
 
-        public Leaders()
+        public LeadersForm()
         {
             InitializeComponent();
 

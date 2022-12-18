@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 namespace Miner
 {
-    public partial class Menu : Form
+    public partial class MenuForm : Form
     {
-        public Menu()
+        public MenuForm()
         {
             InitializeComponent();
         }
@@ -18,20 +18,20 @@ namespace Miner
         private void SettingsBtn_Click(object sender, EventArgs e)
         {
             Hide();
-            FormClass.Settings = new Settings();
+            FormClass.Settings = new SettingsForm();
             FormClass.Settings.Show();
         }
 
         private void LeadersBtn_Click(object sender, EventArgs e)
         {
             Hide();
-            FormClass.Leaders = new Leaders();
+            FormClass.Leaders = new LeadersForm();
             FormClass.Leaders.Show();
         }
 
         private void GameBtn_Click(object sender, EventArgs e)
         {
-            FormClass.Game = new Game();
+            FormClass.Game = new GameForm();
 
             Hide();
             FormClass.Game.ShowDialog();

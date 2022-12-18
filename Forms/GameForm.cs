@@ -2,13 +2,14 @@
 using System.Drawing;
 using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Miner
 {
-    public partial class Game : Form
+    public partial class GameForm : Form
     {
-        int width = 20;
-        int height = 20;
+        int width = 0;
+        int height = 0;
         int offset = 30;
         int bombPercent = 10;
         bool isFirstClick = true;
@@ -18,9 +19,12 @@ namespace Miner
 
         int score;
 
+        string settings;
 
-        public Game()
+
+        public GameForm()
         {
+            
             InitializeComponent();
             Timer timer1 = new Timer();
             timer1.Tick += Timer1_Tick;
@@ -34,8 +38,55 @@ namespace Miner
 
         private void Form1_Load_1(object sender, EventArgs e)
         {
+            LoadSettings();
+            SetupSettings();
+
             field = new FieldButton[width, height];
             GenerateField();
+        }
+
+        private void LoadSettings()
+        {
+            try
+            {
+                using (var sr = new StreamReader("settings.txt"))
+                {
+                    settings = sr.ReadToEnd();
+                }
+            }
+            catch (IOException e)
+            {
+                Console.WriteLine("The file could not be read:");
+                Console.WriteLine(e.Message);
+            }
+        }
+
+        private void SetupSettings()
+        {
+            if (settings == "")
+            {
+                settings = "easy\r\n";
+            }
+
+            if (settings == "easy\r\n")
+            {
+                width = height = 9;
+                Size = new Size(290, 310);
+
+            }
+
+            if (settings == "normal\r\n")
+            {
+                width = height = 16;
+                Size = new Size(500, 520);
+            }
+
+            if (settings == "hard\r\n")
+            {
+                width = 30;
+                height = 16;
+                Size = new Size(920, 520);
+            }
         }
 
 
@@ -208,7 +259,7 @@ namespace Miner
         private void GameOver()
         {
             Hide();
-            FormClass.InputUserName = new InputUserName();
+            FormClass.InputUserName = new InputUserNameForm();
             FormClass.InputUserName.Score = score;
             FormClass.InputUserName.Show();
         }

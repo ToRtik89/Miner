@@ -1,6 +1,6 @@
 ﻿namespace Miner
 {
-    partial class InputUserName
+    partial class InputUserNameForm
     {
         /// <summary>
         /// Required designer variable.

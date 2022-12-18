@@ -16,7 +16,7 @@ namespace Miner
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(FormClass.Menu = new Menu());
+            Application.Run(FormClass.Menu = new MenuForm());
         }
     }
 }

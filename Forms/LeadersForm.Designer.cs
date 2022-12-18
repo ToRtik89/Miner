@@ -1,6 +1,6 @@
 ﻿namespace Miner
 {
-    partial class Leaders
+    partial class LeadersForm
     {
         /// <summary>
         /// Required designer variable.

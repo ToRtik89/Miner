@@ -1,6 +1,6 @@
 ﻿namespace Miner
 {
-    partial class Menu
+    partial class MenuForm
     {
         /// <summary>
         /// Required designer variable.
